@@ -13,7 +13,18 @@ export function useList() {
     }
   ])
   /** Создать новый элемент. */
-  const createItem = () => {};
+  const createItem = (e) => {
+    setList(products => (
+        [
+            ...products,
+          {
+            id: products.length,
+            title: '',
+            done: false
+          }
+        ]
+    ))
+  };
 
   /**
    * Установить заголовок элемента.
