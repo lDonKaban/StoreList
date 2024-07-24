@@ -1,6 +1,17 @@
 import {useState} from 'react'
 export function useList() {
-  const [list, setList] = useState([])
+  const [list, setList] = useState([
+    {
+      id: 1,
+      title: 'Огурцы',
+      done: false
+    },
+    {
+      id: 2,
+      title: 'Помидоры',
+      done: false
+    }
+  ])
   /** Создать новый элемент. */
   const createItem = () => {};
 
@@ -17,7 +28,16 @@ export function useList() {
    *
    * @param id - ID элемента.
    */
-  const toggleItem = (id) => {};
+  const toggleItem = (id) => {
+    setList((products) => {
+      return products.map(product => (
+          {
+            ...product,
+            done: product.id === id ? !product.done : product.done
+          }
+      ))
+    });
+  };
 
   /**
    * Удалить элемент.
