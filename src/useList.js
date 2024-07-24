@@ -18,7 +18,7 @@ export function useList() {
         [
             ...products,
           {
-            id: products.length,
+            id: products.length+1,
             title: '',
             done: false
           }
@@ -32,7 +32,19 @@ export function useList() {
    * @param id - ID элемента.
    * @param title - Заголовок элемента.
    */
-  const setItemTitle = (id, title) => {};
+  const setItemTitle = (id, title) => {
+    setList(products => {
+      return products.map(product => {
+        if (product.id === id) {
+          return {
+            ...product,
+            title
+          }
+        }
+        return product
+      })
+    })
+  };
 
   /**
    * Переключить выполненность элемента.
@@ -41,12 +53,15 @@ export function useList() {
    */
   const toggleItem = (id) => {
     setList((products) => {
-      return products.map(product => (
-          {
-            ...product,
-            done: product.id === id ? !product.done : product.done
+      return products.map(product => {
+        if (product.id === id) {
+          return {
+          ...product,
+          done: !product.done
           }
-      ))
+        }
+        return product
+      })
     });
   };
 
