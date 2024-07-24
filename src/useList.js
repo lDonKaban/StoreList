@@ -1,4 +1,6 @@
+import {useState} from 'react'
 export function useList() {
+  const [list, setList] = useState([])
   /** Создать новый элемент. */
   const createItem = () => {};
 
