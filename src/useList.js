@@ -35,7 +35,6 @@ export function useList() {
           }
         ]
     ))
-
   };
 
   /**
@@ -75,8 +74,6 @@ export function useList() {
         return product
       })
     });
-
-    saveProductList(list)
   };
 
   /**
@@ -86,8 +83,6 @@ export function useList() {
    */
   const deleteItem = (id) => {
     setList(products => products.filter(product => product.id !== id))
-
-    saveProductList(list)
   };
 
   return {
