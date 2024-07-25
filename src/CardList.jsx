@@ -3,6 +3,7 @@ import './CardList.css';
 
 export const CardList = ({
   list,
+  inputRef,
   onItemTitleChange,
   onItemToggle,
   onItemDelete,
@@ -15,6 +16,7 @@ export const CardList = ({
             <Card
               id={id}
               title={title}
+              inputRef={inputRef}
               done={done}
               onTitleChange={onItemTitleChange}
               onToggle={onItemToggle}

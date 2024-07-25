@@ -1,29 +1,41 @@
-import {useState} from 'react'
+import {useEffect, useRef, useState} from 'react'
 export function useList() {
-  const [list, setList] = useState([
-    {
-      id: 1,
-      title: 'Огурцы',
-      done: false
-    },
-    {
-      id: 2,
-      title: 'Помидоры',
-      done: false
-    }
-  ])
+  const [list, setList] = useState(restoreProductList())
+  const inputRef = useRef(null)
+
+  const saveProductList = (products) => {
+    localStorage.setItem('productList', JSON.stringify(products))
+  }
+
+  function restoreProductList () {
+    const rawProductList = localStorage.getItem('productList')
+
+    if (!rawProductList) return []
+
+    return (JSON.parse(rawProductList))
+  }
+
+  useEffect(() => {
+    inputRef?.current?.focus()
+  }, [list.length]);
+
+  useEffect(() => {
+    saveProductList(list)
+  }, [list]);
+
   /** Создать новый элемент. */
-  const createItem = (e) => {
+  const createItem = () => {
     setList(products => (
         [
             ...products,
           {
-            id: products.length+1,
+            id: Date.now(),
             title: '',
             done: false
           }
         ]
     ))
+
   };
 
   /**
@@ -63,6 +75,8 @@ export function useList() {
         return product
       })
     });
+
+    saveProductList(list)
   };
 
   /**
@@ -70,10 +84,15 @@ export function useList() {
    *
    * @param id - ID элемента.
    */
-  const deleteItem = (id) => {};
+  const deleteItem = (id) => {
+    setList(products => products.filter(product => product.id !== id))
+
+    saveProductList(list)
+  };
 
   return {
     list,
+    inputRef,
     createItem,
     setItemTitle,
     toggleItem,
