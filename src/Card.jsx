@@ -3,6 +3,7 @@ import './Card.css';
 export const Card = ({
   id,
   title,
+  inputRef,
   onTitleChange,
   done,
   onToggle,
@@ -43,6 +44,7 @@ export const Card = ({
         value={title}
         onChange={handleTitleChange}
         onBlur={handleTitleBlur}
+        ref={inputRef}
       />
     </form>
   );

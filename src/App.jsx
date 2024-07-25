@@ -3,7 +3,7 @@ import { useList } from './useList';
 import './App.css';
 
 export const App = () => {
-  const { list, createItem, setItemTitle, toggleItem, deleteItem } = useList();
+  const { list, createItem, setItemTitle, toggleItem, deleteItem, inputRef } = useList();
 
   return (
     <div className="app">
@@ -11,6 +11,7 @@ export const App = () => {
 
       <CardList
         list={list}
+        inputRef={inputRef}
         onItemTitleChange={setItemTitle}
         onItemToggle={toggleItem}
         onItemDelete={deleteItem}
